@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			favoritos: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -15,6 +16,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
+
+				//el (uid) es un parámetro		
+			handlerFavoritos: (uid) => {
+				//setStore guarda en la tienda//
+				//se coloca [...store.favoritos, uid] porque se esta concatenando al atributo favoritos del store, el uid.
+				setStore({favoritos:[...store.favoritos,uid]})
+			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");

@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Card, Row, Col, Button } from 'react-bootstrap';
 import {Link} from "react-router-dom";
+import { Context } from "../store/appContext";
 
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
@@ -23,7 +24,7 @@ const Feature = (props) => {
    )
   };
 
-export const Cardgroup = () => {
+export const CardgroupCharacter = () => {
   const [dato, setDato] = useState([])
   useEffect (() => {
     fetch("https://www.swapi.tech/api/people")
@@ -33,6 +34,8 @@ export const Cardgroup = () => {
   //entonces al colocar setDato(data.results), queda que dato es igual a data.results//
   .catch(err => console.error(err))
   }, []);
+  const {store, actions} = useContext(Context);
+ 
     return (
         <>
         <h4 style={{color:"red"}}>Characters</h4>
@@ -50,10 +53,15 @@ export const Cardgroup = () => {
           </Card.Text>
         </Card.Body>
         <div>
-          <Link to="/vistaDetalle">
+          <Link to={`/vistaDetalleCharacter/${people.uid}`}>
         <Button style={{float:"left",}} variant="outline-primary">Learn more!</Button>
         </Link>
-        <Button variant="outline-warning" style ={{float:"right"}}><i class="fa-regular fa-heart"></i></Button>{' '}
+        {/* onclick recibe como argumento un callback (función sin ejecutarse) */}
+        {/* estos callback es el nombre de la función sin el parentesis, por ejemplo: actions.handlerfavoritos */}
+        {/* Hay situaciones donde por temas de simplificación, se le suele pasar la ejecución como argumento (ej: actions.handlerfavoritos(uid)) */}
+        {/* ante este tipo de sutaciones, el onclick arrojará error dado que no acepta resultado de una función (entregado por el return, resultado de la ejecución de esta) */}
+        {/* Para salir del cacho, se suele crear un callback dentro del mismo onclick a través de una función anónima: () => action.handlefavoritos(uid) */}
+        <Button onClick={() => actions.handlerfavoritos(uid)} variant="outline-warning" style ={{float:"right"}}><i className="fa-regular fa-heart"></i></Button>{' '}
         </div>
        
       </Card>

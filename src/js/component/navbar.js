@@ -11,9 +11,9 @@ export const Navbar = () => {
 			</Link>
 			<div className="ml-auto">
 					<DropdownButton id="dropdown-basic-button" title="Favorites">
-						<Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-						<Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-						<Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+						<Dropdown.Item href="#/action-1">Action <i className="fa-solid fa-trash-can"></i></Dropdown.Item>
+						<Dropdown.Item href="#/action-2">Another action <i className="fa-solid fa-trash-can"></i></Dropdown.Item>
+						<Dropdown.Item href="#/action-3">Something else <i className="fa-solid fa-trash-can"></i></Dropdown.Item>
 						</DropdownButton>
 			</div>
 		</nav>
