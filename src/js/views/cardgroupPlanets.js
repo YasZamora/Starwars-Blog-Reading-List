@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Card, Row, Col, Button } from 'react-bootstrap';
 import {Link} from "react-router-dom";
+import { Context } from "../store/appContext";
 
 
 const Feature = (props) => {
@@ -29,7 +30,10 @@ export const CardgroupPlanets =() => {
     //data.results es el array de objetos en donde cada objeto es un personaje//
     //entonces al colocar setDato(data.results), queda que dato es igual a data.results//
     .catch(err => console.error(err))
-  })
+  }, []);
+
+const {store, actions} = useContext(Context);
+console.log(store.favoritos)
 
 return (
     <>
@@ -48,10 +52,10 @@ return (
       </Card.Text>
     </Card.Body>
     <div>
-      <Link to="/vistaDetalle">
+      <Link to={`/vistaDetallePlanets/${planets.uid}`}>
     <Button style={{float:"left",}} variant="outline-primary">Learn more!</Button>
     </Link>
-    <Button variant="outline-warning" style ={{float:"right"}}><i class="fa-regular fa-heart"></i></Button>{' '}
+    <Button onClick={() => actions.handlerFavoritos(planets.name)} variant="outline-warning" style ={{float:"right"}}><i className="fa-regular fa-heart"></i></Button>{' '}
     </div>
    
   </Card>

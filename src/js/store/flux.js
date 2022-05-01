@@ -21,7 +21,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 			handlerFavoritos: (uid) => {
 				//setStore guarda en la tienda//
 				//se coloca [...store.favoritos, uid] porque se esta concatenando al atributo favoritos del store, el uid.
+				const store = getStore();
 				setStore({favoritos:[...store.favoritos,uid]})
+			},
+			deleteFavoritos: (index) => {
+				const store = getStore();
+				//splice elimina un elemento de un array, retornando el valor eliminado, 
+				// en este caso arrayCopy es una copia del array favoritos
+				const arrayCopy = [...store.favoritos]
+				// a arrayCopy s ele aplica splice entregandole index, que es la posición del elemento que se debe elminar y el 1 significa que elimina sólo 1 elemento
+				arrayCopy.splice(index,1)
+				//luego con el set Store se le está diciendo que guarde en favoritos del store, el arrayCopy, que es favoritos menos el elemento eliminado.
+				setStore({favoritos: arrayCopy})
 			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {

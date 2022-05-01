@@ -35,6 +35,7 @@ export const CardgroupCharacter = () => {
   .catch(err => console.error(err))
   }, []);
   const {store, actions} = useContext(Context);
+  console.log(store.favoritos)
  
     return (
         <>
@@ -61,7 +62,7 @@ export const CardgroupCharacter = () => {
         {/* Hay situaciones donde por temas de simplificación, se le suele pasar la ejecución como argumento (ej: actions.handlerfavoritos(uid)) */}
         {/* ante este tipo de sutaciones, el onclick arrojará error dado que no acepta resultado de una función (entregado por el return, resultado de la ejecución de esta) */}
         {/* Para salir del cacho, se suele crear un callback dentro del mismo onclick a través de una función anónima: () => action.handlefavoritos(uid) */}
-        <Button onClick={() => actions.handlerfavoritos(uid)} variant="outline-warning" style ={{float:"right"}}><i className="fa-regular fa-heart"></i></Button>{' '}
+        <Button onClick={() => actions.handlerFavoritos(people.name)} variant="outline-warning" style ={{float:"right"}}><i className="fa-regular fa-heart"></i></Button>{' '}
         </div>
        
       </Card>
